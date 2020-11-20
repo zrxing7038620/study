@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+}
+table{
+    width: 600px;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+td{
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #999;
+    width: 30%;
+    font-size: 14px;
+}
+thead td{
+    background-color: #eee;
+    font-size: 16px;
+    font-weight: bold;
+}
+</style>
+<body>
+<!--附件中提供了一组数据，并且每条数据前面都有一个checkbox格式的input框。
+请完成全选、反选和取消功能。点击全选页面中的input框全部选中；点击反选，页面中已选中的input框取消选中而未选中的input选中；点击取消，取消所有input框的选中状态。
+-->
+<table>
+    <thead>
+        <tr>
+            <td><a href="javascript:void(0)" id="quanxuan">全选</a>
+                <a href="javascript:void(0)" id="fanxuan">反选</a>
+                <a href="javascript:void(0)" id="quxiao">取消</a>
+            </td>
+            <td>ID</td>
+            <td>标题</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>1</td>
+            <td>标题1</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>2</td>
+            <td>标题2</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>3</td>
+            <td>标题3</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>4</td>
+            <td>标题4</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>5</td>
+            <td>标题5</td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    var inputs=document.querySelectorAll('input');
+    //console.log(inputs);
+    //设置全选，input里面有checker属性为true就是选中状态
+    document.getElementById('quanxuan').onclick=function()
+    {
+        for(var i=0;i<inputs.length;i++)
+        {
+            inputs[i].checked=true;
+        }
+    }
+    //设置取消，input里面有checker属性为false就是选中状态
+    document.getElementById('quxiao').onclick=function()
+    {
+        for(var i=0;i<inputs.length;i++)
+        {
+            inputs[i].checked=false;
+        }
+    }
+    //设置反选
+    document.getElementById('fanxuan').onclick=function()
+    {
+        for(var i=0;i<inputs.length;i++)
+        {
+            inputs[i].checked=!inputs[i].checked;
+        }
+    }
+</script>
+</body>
+</html>
