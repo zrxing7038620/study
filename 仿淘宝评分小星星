@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+img{
+    float: left;
+}
+</style>
+</head>
+<body>
+    <img src="./images/rank_3.gif" alt="">
+    <img src="./images/rank_4.gif" alt="">
+    <img src="./images/rank_3.gif" alt="">
+    <img src="./images/rank_4.gif" alt="">
+    <img src="./images/rank_3.gif" alt="">
+    <img src="./images/rank_4.gif" alt="">
+    <img src="./images/rank_3.gif" alt="">
+    <img src="./images/rank_4.gif" alt="">
+    <img src="./images/rank_3.gif" alt="">
+    <img src="./images/rank_4.gif" alt="">
+<script>
+    var imgs=document.querySelectorAll('img');
+    //console.log(imgs);
+
+    for(var i=0;i<imgs.length;i++)
+    {
+        imgs[i].a=i;        
+        imgs[i].onmouseover=function()
+        {
+            //鼠标向左边移动，移动到了第n个图片，那么，从第0个到第n个的图片替换掉
+            for(var j=0;j<=this.a;j++)
+            {
+                imgs[j].src=imgs[j].src.replace('rank_3','rank_1');
+                imgs[j].src=imgs[j].src.replace('rank_4','rank_2');
+            }
+            //鼠标向右移动，相当于图片从n到imgs.length变会到灰色
+            for(var k=this.a+1;k<=imgs.length;k++)
+            {
+                imgs[j].src=imgs[j].src.replace('rank_1','rank_3');
+                imgs[j].src=imgs[j].src.replace('rank_2','rank_4');
+            }
+        }
+    }
+</script>
+</body>
+</html>
