@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+}
+body{
+    width: 600px;
+    margin:20px auto;
+}
+li{
+    display:inline-block;
+    background-color: black;
+    color: white;
+    width: 120px;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+.title{
+    background-color: #666;
+    font-size: 14px;
+    color: black;
+}
+div{
+    width: 500px;
+    height: 300px;
+    background-color: #999;
+    display: none;
+}
+.centent{
+    display: grid;
+}
+</style>
+<body>
+<ul>
+    <li class="title">常见问题</li>
+    <li>行业新闻</li>
+    <li>公司新闻</li>
+</ul>
+<div class="centent">这是常见问题的内容</div>
+<div>这是行业新闻的内容</div>
+<div>这是公司新闻的内容</div>
+<script>
+//给li设置点击事件，点击对应的li，则增加对应li的id属性，其余为空
+var titles=document.querySelectorAll('li');
+var centents=document.querySelectorAll('div');
+//console.log(titles);
+for(var i=0;i<=titles.length;i++)
+{
+    titles[i].index=i;
+    //console.log(titles[i]);
+    titles[i].onclick=function()
+    {
+        for(var j=0;j<titles.length;j++)
+        {
+            if(this.index==j)
+            {
+                titles[j].className='title';
+                centents[j].className='centent';
+            }
+            else
+            {
+                titles[j].className='';
+                centents[j].className='';
+        }
+        }
+    }
+}
+</script>
+</body>
+</html>
