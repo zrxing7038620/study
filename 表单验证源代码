@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+    margin:0;
+    padding: 0;
+    border: 0 none;
+}
+div{
+    width: 600px;
+    margin: 10px auto;
+}
+h3{
+    text-align: center;
+}
+input{
+    margin-top: 20px;
+    width: 200px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    height: 30px;
+}
+#username_text{
+    font-size: 12px;
+    color: red;
+}
+span{
+    font-size: 12px;
+    margin-top: 5px;
+    color:#999;
+}
+</style>
+<script>
+var flag_username=false;
+var flag_password=false;
+var flag_tel=false;
+var from=document.from;
+//用户名的判断
+//用户名输入框失去焦点，判断用户名是否可用
+function blur_username()
+{
+    var username_text=document.getElementById('username_text');
+    var username=document.getElementById('username');
+    if(!/^[a-zA-Z]\w{3,}$/g.test(username.value))
+    {
+        var username_text2='用户名不符合要求！';
+        username_text.innerHTML=username_text2;
+        username_text.style.color='#DC143C';
+    }else
+    {
+    flag_username=true;            
+    }
+}
+//用户名有焦点，展示用户名的要求
+function focus_username()
+{
+    username_text.innerHTML="用户名不能为空，首位需要是字母，长度必须大于4位";
+    username_text.style.color='#999';
+}
+//密码的判断
+//密码输入框失去焦点，判断密码是否可用
+function blur_password()
+{
+    var password_text=document.getElementById('password_text');
+    var password=document.getElementById('password');
+    if(/^\w{6,}$/g.test(password.value))
+    {
+        if(/^[0-9]+$|^[a-z]+$|^[A-Z]+$/g.test(password.value))
+        {
+            var password_text3='密码较弱，建议使用数字和大小写字母结合';
+            password_text.innerHTML=password_text3;
+            password_text.style.color='#3CB371';  
+            flag_password=true; 
+        }
+        else if(/^[0-9a-z]+$|^[0-9A-Z]+$|^[A-Za-z]+$/g.test(password.value))
+        {
+            var password_text3='密码中等，建议使用数字和大小写字母结合';
+            password_text.innerHTML=password_text3;
+            password_text.style.color='#2E8B57';
+            flag_password=true;   
+        }
+        else
+        {
+            var password_text3='密码较强！';
+            password_text.innerHTML=password_text3;
+            password_text.style.color='#228B22';  
+            flag_password=true; 
+        }
+    }
+    else
+    {
+        var password_text4='密码不符合要求！';
+        password_text.innerHTML=password_text4;
+        password_text.style.color='#DC143C';        
+    }   
+}
+//密码有焦点，展示密码的要求
+function focus_password()
+{
+    password_text.innerHTML="密码长度至少6位，不能有特殊符号";
+    password_text.style.color='#999';
+}
+//手机号码的判断
+//手机号码输入框失去焦点，判断手机号码是否可用
+function blur_tel()
+{
+    var tel=document.getElementById('tel').value;
+    var tel_text=document.getElementById('tel_text');
+    if(!/^1\d{10}$/g.test(tel))
+    {
+        var tel_text2='手机号码不符合要求！';
+        tel_text.innerHTML=tel_text2;
+        tel_text.style.color='#DC143C';  
+    }
+    flag_tel=true; 
+};
+//手机号码有焦点，展示手机号码的正确格式
+function focus_tel()
+{
+    var tel_text2='请输入11位正确的手机号码！';
+    tel_text.innerHTML=tel_text2;
+    tel_text.style.color='#999';
+}
+//验证表单提交的条件是否满足
+function check_submit()
+{
+    if(flag_tel==true&&flag_username==true&&flag_password==true)
+    {
+        return true;
+    }
+    return false;
+}
+</script>
+</head>
+<body>
+<div>
+    <h3>表单</h3>
+    <form action="https://www.baidu.com" method="post" name="from" onsubmit="return check_submit()">
+        用户名：<input type="text" id="username" name="username" onblur="blur_username()" onfocus="focus_username()">
+        <span id="username_text">用户名不能为空，首位需要是字母，长度必须大于4位</span><br>
+        密  码： <input type="text" id="password" name="password" onblur="blur_password()" onfocus="focus_password()">
+        <span id="password_text">密码长度至少6位，不能有特殊符号</span><br>
+        手  机： <input type="text" id="tel" name="tel" onblur="blur_tel()" onfocus="focus_tel()">
+        <span id="tel_text">请输入11位正确的手机号码</span><br>
+        邮  箱： <input type="text" name="email"><br>
+        <input type="submit" name="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>
