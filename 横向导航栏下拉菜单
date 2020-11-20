@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    text-emphasis: none;
+}
+#head{
+    width: 600px;
+    margin: 10px auto;
+    list-style: none;
+}
+.about{
+    display: block;
+    float: left;
+    margin: 0 5px;
+}
+.about li{
+    list-style: none;
+    text-align: center;
+}
+.about a:link{
+    display: block;
+    width: 120px;
+    height: 30px;
+    text-emphasis: none;
+    font-size: 14px;
+}
+.content_head{
+    background-color: brown;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-size: 14px;
+}
+.child_ul{
+    background-color: #eee;
+    display: none;
+}
+</style>
+</head>
+<body>
+<div id=head>
+    <ul>
+        <li class="about">
+            <a href="javascript:void(0)" class="content_head">关于公司</a>
+            <ul class="child_ul">
+                <li><a href="javascript:void(0)">公司简介</a></li>
+                <li><a href="javascript:void(0)">发展历程</a></li>
+                <li><a href="javascript:void(0)">公司文化</a></li>
+                <li><a href="javascript:void(0)">公司荣誉</a></li>
+            </ul>
+        </li>
+        <li class="about" >
+            <a href="javascript:void(0)" class="content_head">媒体中心</a>
+            <ul class="child_ul">
+                <li><a href="javascript:void(0)">常见问题</a></li>
+                <li><a href="javascript:void(0)">公司新闻</a></li>
+                <li><a href="javascript:void(0)">行业新闻</a></li>
+                <li><a href="javascript:void(0)">视频中心</a></li>
+            </ul>
+        </li>
+        <li class="about">
+            <a href="javascript:void(0)" class="content_head">招商加盟</a>
+            <ul class="child_ul">
+                <li><a href="javascript:void(0)">招商政策</a></li>
+                <li><a href="javascript:void(0)">加盟流程</a></li>
+                <li><a href="javascript:void(0)">加盟优势</a></li>
+                <li><a href="javascript:void(0)">加盟条件</a></li>
+            </ul>
+        </li>
+    </ul>    
+</div>
+<script>
+    var about=document.querySelectorAll('.about');
+    //console.log(child_ul);
+    for(var i=0;i<about.length;i++)
+    {
+        about[i].onmouseover=function()
+        {
+            this.children[1].style.display='block';
+        }
+        about[i].onmouseout=function()
+        {
+            this.children[1].style.display='none';
+        }
+    }
+</script>
+</body>
+</html>
