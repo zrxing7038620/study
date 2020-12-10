@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //创建背景地图
+    function map()
+    {
+        //定义地图的属性
+        this.width='600px';
+        this.height='400px';
+        this.bachgroundColor='#dddddd';
+        this.position='relative';
+        this.div_map=null;
+        //定义地图显示方法
+        this.show=function()
+        {
+            this.div_map=document.createElement('div');
+            this.div_map.style.width=this.width;
+            this.div_map.style.height=this.height;
+            this.div_map.style.backgroundColor=this.bachgroundColor;
+            this.div_map.style.position=this.position;
+            document.body.appendChild(this.div_map);
+        }
+    }
+    //实例化对象，并且调用显示方法
+    var map=new map();
+    map.show();
+    //创建食物
+    function food()
+    {
+        //定义食物的属性
+        this.width=20;
+        this.height=20;
+        this.bachgroundColor='red';
+        this.x=null;
+        this.y=null;
+        this.position='absolute';
+        this.new_food=null;
+        //定义食物显示方法
+        this.show=function()
+        {
+            if(this.new_food==null)
+            {
+                this.new_food=document.createElement('div');
+            }
+            this.new_food.style.width=this.width+'px';
+            this.new_food.style.height=this.height+'px';
+            this.new_food.style.backgroundColor=this.bachgroundColor;
+            this.x=Math.floor(Math.random()*30);
+            this.y=Math.floor(Math.random()*20);
+            this.new_food.style.left=this.x*this.width+'px';
+            this.new_food.style.top=this.y*this.height+'px';
+            this.new_food.style.position=this.position;
+            map.div_map.appendChild(this.new_food);
+        }
+    }
+    //实例化对象，并且调用显示方法
+    var food=new food();
+    food.show();
+    //创建贪吃蛇
+    function snake()
+    {
+        this.body=[[3,2,'green',null],[2,2,'blue',null],[1,2,'blue',null]];
+        this.width=20;
+        this.height=20;
+        this.position='absolute';
+        this.diriction='right';
+        //定制显示的方法
+        this.show=function()
+        {
+            for(var i=0;i<this.body.length;i++)
+            {
+                if(this.body[i][3]==null)
+                {
+                    this.body[i][3]=document.createElement('div');
+                }
+                this.body[i][3].style.width=this.width+'px';
+                this.body[i][3].style.height=this.height+'px';
+                this.body[i][3].style.backgroundColor=this.body[i][2];
+                this.body[i][3].style.left=this.body[i][0]*this.width+'px';
+                this.body[i][3].style.top=this.body[i][1]*this.height+'px';
+                this.body[i][3].style.position=this.position;
+                map.div_map.appendChild(this.body[i][3]);
+            }            
+        }
+        //定义贪吃蛇移动的方法
+        this.move=function()
+        {
+            //蛇吃到食物
+            if(this.body[0][0]==food.x && this.body[0][1]==food.y)
+            {
+                this.body.push([0,0,'blue',null]);
+                if(time>150)
+                {
+                    time*=0.95;
+                    timer();
+                }
+                else
+                {   
+                    time=160;
+                    timer();                    
+                }
+                food.show();
+            }
+            //移动过程中改变左边
+            for(var i=this.body.length-1;i>0;i--)
+            {
+                this.body[i][0]=this.body[i-1][0];
+                this.body[i][1]=this.body[i-1][1];
+            }
+            //按按键之后，蛇的走向
+            if(this.diriction=='right')
+            {
+                this.body[0][0]+=1;
+            }
+            else if(this.diriction=='left')
+            {
+                this.body[0][0]-=1;
+            }
+            else if(this.diriction=='up')
+            {
+                this.body[0][1]-=1;
+            }
+            else if(this.diriction=='down')
+            {
+                this.body[0][1]+=1;
+            }   
+            this.show();
+            //当蛇移动处边界的时候，给出提示，并且暂停蛇移动，点击确认，则刷新界面重新开始
+            if(this.body[0][0]>29 || this.body[0][0]<0 || this.body[0][1]>19 || this.body[0][1]<0)
+            {
+                alert('GAME OVER');
+                location.reload();
+            }
+        }
+    }
+    //实例化蛇对象
+    var snake=new snake();
+    snake.show();
+    var time=400;
+    function timer()
+    {
+        clearInterval(new_time)
+        //定时器，循环运用move方法，贪吃蛇向右移动
+        var new_time=setInterval("snake.move()",time);
+    }
+    timer();
+    //给页面绑定按键盘事件
+    document.onkeydown=function(evt)
+    {
+        var e=window.event || evt;
+        var keyCode=e.keyCode;
+        if(keyCode==37 && snake.diriction!='right')
+        {
+            snake.diriction='left';
+        }
+        else if(keyCode==38 && snake.diriction!='down')
+        {
+            snake.diriction='up';
+        }
+        else if(keyCode==39 && snake.diriction!='left')
+        {
+            snake.diriction='right';
+        }
+        else if(keyCode==40 && snake.diriction!='up')
+        {
+            snake.diriction='down';
+        }
+    }
+</script>
+</body>
+</html>
